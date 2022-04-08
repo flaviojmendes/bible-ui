@@ -3,17 +3,16 @@ import "./App.css";
 import axios, { AxiosResponse } from "axios";
 import { Book } from "./model/BookModel";
 import { Search } from "./model/SearchModel";
-import {
-  Flex,
-  Box,
-  Container
-} from "@chakra-ui/react";
+
 import Videos from "./components/VideosComponent";
 import BookView from "./components/BookComponent";
+import ChaptersTree from "./components/ChaptersTree";
 
 function App() {
   const [book, setBook] = React.useState<Book>();
   const [videos, setVideos] = React.useState<any[]>([]);
+  const [currentChapter, setCurrentChapter] = React.useState<number>(0);
+  const [isLoading, setLoading] = React.useState<boolean>(true);
 
   useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
@@ -26,35 +25,43 @@ function App() {
 
   useEffect(() => {
     const search: Search = { search_term: book?.title || "" };
-
-    axios
-      .post("http://localhost:8000/search", search)
-      .then(function (response) {
-        setVideos(response.data.result);
-      });
+    searchVideos(search);
   }, [book]);
 
-  function searchVideos(index: number) {
-    const search: Search = { search_term: `${book?.title} ${book?.chapters[index].title || ""}` };
+  function searchVideos(search: Search) {
+    if (book) {
+      setLoading(true);
+      axios
+        .post("http://localhost:8000/search", search)
+        .then(function (response) {
+          setVideos(response.data.result);
+          setLoading(false);
+        });
+    }
+  }
 
-    axios
-      .post("http://localhost:8000/search", search)
-      .then(function (response) {
-        setVideos(response.data.result);
-      });
+  function handleTabChange(index: number) {
+
+    setCurrentChapter(index);
+
+    const search: Search = {
+      search_term: `${book?.title} ${book?.chapters[index].title || ""}`,
+    };
+    searchVideos(search);
   }
 
   return (
-    <Container maxW="8xl" mt={10} mx="auto">
-      <Flex borderRadius={4} border={2} borderStyle={"solid"} borderColor="#FFBB98">
-        <Box w="70%" p={4}>
-          <BookView book={book} handleTabChange={searchVideos} />
-        </Box>
-        <Box w="30%" p={4}>
-          <Videos videos={videos}/>
-        </Box>
-      </Flex>
-    </Container>
+    <div className="container w-100 mx-auto pt-10">
+      <div className="flex flex-row">
+        <div className="basis-1/4"><ChaptersTree book={book} handleTabChange={handleTabChange}/></div>
+        <div className="basis-2/4">
+          <BookView book={book} currentChapter={currentChapter}/>
+        </div>
+        <div className="basis-1/4">
+          <Videos videos={videos} isLoading={isLoading} />
+        </div>
+      </div>
+    </div>
   );
 }
 

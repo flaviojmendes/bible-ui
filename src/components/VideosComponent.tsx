@@ -1,41 +1,37 @@
-import {
-    Heading,
-    Grid,
-    GridItem,
-    Text,
-  } from "@chakra-ui/react";
-
-
 interface Props {
-    videos: any[];
-} 
+  videos: any[];
+  isLoading: boolean;
+}
 export default function Videos(props: Props) {
   return (
     <>
-      <Heading fontSize={"lg"}>Related Videos</Heading>
-      {props.videos?.map((video, index) => {
+      <h2 className="text-xl text-center mt-20 mb-5">Vídeos Relacionados</h2>
+      {!props.isLoading && props.videos?.map((video, index) => {
         return (
-          <Grid my={2} templateColumns="repeat(5, 1fr)" gap={0}>
-            <GridItem colSpan={2}>
+          <div className="flex flex-row m-2 gap-4" key={index}>
+            <div className="w-2/5">
               <img
-                className="w-full"
+                className="w-100 rounded-md"
                 src={video.thumbnails[0].url}
                 alt="video thumbnail"
               />
-            </GridItem>
-            <GridItem colSpan={3}>
-              <a
-                href={`https://youtube.com/watch?v=${video.id}`}
-                target="_blank"
-              >
-                <Text fontWeight={500} fontSize="md">
-                  {video.title}
-                </Text>
+            </div>
+            <div className="w-3/5">
+              <a href={`https://youtube.com`} target="_blank">
+                <span className="text-md">{video.title}</span>
               </a>
-            </GridItem>
-          </Grid>
+            </div>
+          </div>
         );
       })}
+
+      {props.isLoading && [...Array(5)].map((e, i) => <div className="flex flex-row m-2 gap-4 animate-pulse">
+        <div className="w-2/5 h-20 rounded-md bg-primary-text"></div>
+        <div className="w-3/5">
+          <div className="w-full h-5 bg-primary-text rounded-xl my-1"></div>
+          <div className="w-full h-5 bg-primary-text rounded-xl"></div>
+        </div>
+      </div>)}
     </>
   );
 }
