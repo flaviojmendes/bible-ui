@@ -1,15 +1,23 @@
 
+export interface Testament {
+    abbrev: string;
+    name: string;
+    books: Book[];
+}
+
 export interface Book {
-    id: number;
-    title: string;
-    chapters: Chapter[];
+    abbrev: string;
+    name: string;
+    chapters: string;
 }
 
 export interface Chapter {
-    title: string;
-    paragraphs: Paragraph[];
+    verses: string[];
 }
 
-export interface Paragraph {
+export interface Verse {
     text: string;
+    book: string;
+    verse: number;
+    chapter: number;
 }

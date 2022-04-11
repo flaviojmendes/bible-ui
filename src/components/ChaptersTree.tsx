@@ -1,32 +1,55 @@
-import { Book } from "../model/BookModel";
+import { Book, Testament } from "../model/BookModel";
 import React from "react";
 
 interface Props {
-  book?: Book;
-  handleTabChange: (tabIndex: number) => void;
+  testaments?: Testament[];
+  handleTabChange: (tabIndex: number, book: Book) => void;
 }
 
 export default function ChaptersTree(props: Props) {
   const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
 
-  function handleTabClick(tabIndex: number) {
+  function handleTabClick(tabIndex: number, book: Book) {
     setSelectedIndex(tabIndex);
-    props.handleTabChange(tabIndex);
+    props.handleTabChange(tabIndex, book);
   }
 
   return (
     <>
-      <h2 className="text-xl text-center mt-20 mb-5">Capítulos</h2>
+      <div className="mr-2 text-xs	">
+        <h2 className="text-xl text-center mt-0 mb-5 font-['Literata']">Livros</h2>
 
-      <div className="grid-cols-1">
-        {props.book?.chapters.map((chapter, index) => (
+        <div className="grid-cols-1">
+          <h3 className="text-center text-lg font-['Literata']">{props.testaments?.["vt"]["name"]}</h3>
+          {props.testaments?.["vt"]["books"].map(
+            (book: Book, index: number) => (
+              <div
+                className={`cursor-pointer my-1 rounded-3xl p-2 font-sans font-semibold ${
+                  selectedIndex === index ? "bg-primary" : ""
+                }`}
+                onClick={() => handleTabClick(index, book)}
+              >
+                {book.name}
+              </div>
+            )
+          )}
+        </div>
+        <h3 className="text-center text-lg font-['Literata']">{props.testaments?.["nt"]["name"]}</h3>
+        {props.testaments?.["nt"]["books"].map((book: Book, index: number) => (
           <div
-            className={`cursor-pointer w-1/2 my-1 rounded-3xl p-2 font-sans font-semibold ${
-              selectedIndex === index ? "bg-primary" : ""
+            className={`cursor-pointer my-1 rounded-3xl p-2 font-sans font-semibold ${
+              selectedIndex === index + props.testaments?.["vt"]["books"].length
+                ? "bg-primary"
+                : ""
             }`}
-            onClick={() => handleTabClick(index)}
+            onClick={() =>
+              handleTabClick(
+                index + props.testaments?.["vt"]["books"].length,
+                book
+              )
+            }
           >
-            {chapter.title}
+            {book.name}
           </div>
         ))}
       </div>
