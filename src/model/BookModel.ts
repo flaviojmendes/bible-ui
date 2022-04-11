@@ -1,4 +1,9 @@
 
+export interface Testaments {
+    vt: Testament;
+    nt: Testament;
+}
+
 export interface Testament {
     abbrev: string;
     name: string;

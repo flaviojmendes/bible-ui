@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import "./App.css";
 import axios, { AxiosResponse } from "axios";
-import { Book, Chapter, Testament } from "./model/BookModel";
+import { Book, Chapter, Testament, Testaments } from "./model/BookModel";
 import { Search } from "./model/SearchModel";
 
 import Videos from "./components/VideosComponent";
@@ -9,7 +9,7 @@ import BookView from "./components/BookComponent";
 import ChaptersTree from "./components/ChaptersTree";
 
 function App() {
-  const [testaments, setTestaments] = React.useState<Testament[]>();
+  const [testaments, setTestaments] = React.useState<Testaments>();
   const [videos, setVideos] = React.useState<any[]>([]);
   const [currentBook, setCurrentBook] = React.useState<Book | undefined>(undefined);
   const [isLoading, setLoading] = React.useState<boolean>(true);

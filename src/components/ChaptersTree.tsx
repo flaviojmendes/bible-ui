@@ -1,8 +1,8 @@
-import { Book, Testament } from "../model/BookModel";
+import { Book, Testament, Testaments } from "../model/BookModel";
 import React from "react";
 
 interface Props {
-  testaments?: Testament[];
+  testaments?: Testaments;
   handleTabChange: (tabIndex: number, book: Book) => void;
 }
 
@@ -38,13 +38,13 @@ export default function ChaptersTree(props: Props) {
         {props.testaments?.["nt"]["books"].map((book: Book, index: number) => (
           <div
             className={`cursor-pointer my-1 rounded-3xl p-2 font-sans font-semibold ${
-              selectedIndex === index + props.testaments?.["vt"]["books"].length
+              selectedIndex === index + props.testaments!["vt"]["books"].length
                 ? "bg-primary"
                 : ""
             }`}
             onClick={() =>
               handleTabClick(
-                index + props.testaments?.["vt"]["books"].length,
+                index + props.testaments!["vt"]["books"].length,
                 book
               )
             }
