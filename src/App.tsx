@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
-    axios.get("http://localhost:8000/bible").then((response: AxiosResponse) => {
+    axios.get(`${import.meta.env.VITE_API_URL}/bible`).then((response: AxiosResponse) => {
       setTestaments(response.data);
     });
   }, []);
@@ -30,7 +30,7 @@ function App() {
     if (testaments) {
       setLoading(true);
       axios
-        .post("http://localhost:8000/search", search)
+        .post(`${import.meta.env.VITE_API_URL}/search`, search)
         .then(function (response) {
           setVideos(response.data.result);
           setLoading(false);
