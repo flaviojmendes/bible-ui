@@ -31,7 +31,7 @@ export default function BookView(props: Props) {
     if (book && book.abbrev) {
       setLoading(true);
       axios
-        .get(`${import.meta.env.VITE_API_URL}/bible/${book.abbrev}/${chapterIndex}`)
+        .get(`https://bibliavideo.com:8000/bible/${book.abbrev}/${chapterIndex}`)
         .then(function (response) {
           setChapter(response.data);
           setLoading(false);
@@ -48,7 +48,7 @@ export default function BookView(props: Props) {
   function getRandomVerse() {
     setLoading(true);
     axios
-      .get(`${import.meta.env.VITE_API_URL}/bible/random-verse`)
+      .get(`https://bibliavideo.com:8000/bible/random-verse`)
       .then(function (response) {
         setRandomVerse(response.data);
         setLoading(false);
