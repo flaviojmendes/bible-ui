@@ -1,5 +1,5 @@
 import { Book, Testament, Testaments } from "../model/BookModel";
-import React from "react";
+import React, { useEffect } from "react";
 
 interface Props {
   testament: Testament | undefined;
@@ -8,6 +8,10 @@ interface Props {
 
 export default function ChaptersTree(props: Props) {
   const [selectedIndex, setSelectedIndex] = React.useState<number>(-1);
+
+  useEffect(() => {
+    setSelectedIndex(-1);
+  }, [props.testament]);
 
   function handleTabClick(tabIndex: number, book: Book) {
     setSelectedIndex(tabIndex);
