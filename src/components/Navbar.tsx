@@ -26,13 +26,13 @@ export default function Navbar(props: Props) {
           {props.testaments && (<div className="flex flex-wrap">
             <div
               onClick={() => handleTestamentClick(props.testaments!.vt)}
-              className="p-1 md:p-3 text-md w-full md:w-fit text-right font-[Cinzel] cursor-pointer"
+              className="p-1 md:p-3 text-sm md:text-md w-full md:w-fit text-right font-[Cinzel] cursor-pointer"
             >
               {props.testaments?.["vt"].name}
             </div>
             <div
               onClick={() => handleTestamentClick(props.testaments!.nt)}
-              className="p-1 md:p-3 text-md w-full md:w-fit text-right font-[Cinzel] cursor-pointer"
+              className="p-1 md:p-3 text-sm md:text-md w-full md:w-fit text-right font-[Cinzel] cursor-pointer"
             >
               {props.testaments?.["nt"].name}
             </div>
