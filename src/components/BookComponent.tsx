@@ -52,7 +52,6 @@ export default function BookView(props: Props) {
       .then(function (response) {
         setRandomVerse(response.data);
         setLoading(false);
-        props.handleTextSelection(tabIndex + 1, response.data.text);
       });
   }
 
