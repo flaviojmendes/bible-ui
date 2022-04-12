@@ -51,8 +51,8 @@ export default function BookView(props: Props) {
       .get(`https://bibliavideo.com:8000/bible/random-verse`)
       .then(function (response) {
         setRandomVerse(response.data);
-        props.handleTextSelection(tabIndex + 1, response.data.text);
         setLoading(false);
+        props.handleTextSelection(tabIndex + 1, response.data.text);
       });
   }
 
