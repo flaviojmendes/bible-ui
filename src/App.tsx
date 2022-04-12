@@ -16,7 +16,7 @@ function App() {
 
   useEffect(() => {
     // Use [] as second argument in useEffect for not rendering each time
-    axios.get(`https://bibliavideo:8000/bible`).then((response: AxiosResponse) => {
+    axios.get(`https://bibliavideo.com:8000/bible`).then((response: AxiosResponse) => {
       setTestaments(response.data);
     });
   }, []);
