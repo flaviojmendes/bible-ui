@@ -92,7 +92,6 @@ export default function BookView(props: Props) {
                     key={`p${index}`}
                     onMouseUp={handleMouseUp}
                     onTouchEnd={handleMouseUp}
-                    onSelect={handleMouseUp}
                   >
                     <sup>{index + 1}</sup> {verse}
                   </p>

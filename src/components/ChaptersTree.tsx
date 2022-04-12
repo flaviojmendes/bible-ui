@@ -7,7 +7,7 @@ interface Props {
 }
 
 export default function ChaptersTree(props: Props) {
-  const [selectedIndex, setSelectedIndex] = React.useState<number>(0);
+  const [selectedIndex, setSelectedIndex] = React.useState<number>(-1);
 
   function handleTabClick(tabIndex: number, book: Book) {
     setSelectedIndex(tabIndex);
