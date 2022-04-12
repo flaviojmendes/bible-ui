@@ -91,6 +91,7 @@ export default function BookView(props: Props) {
                     className="my-5 text-justify font-['Literata']"
                     key={`p${index}`}
                     onMouseUp={handleMouseUp}
+                    onTouchEnd={handleMouseUp}
                   >
                     <sup>{index + 1}</sup> {verse}
                   </p>
@@ -117,10 +118,10 @@ export default function BookView(props: Props) {
         {!props.book && (
           <>
             <div className="mx-auto mt-28 w-fit">
-              <p className="text-justify font-['Literata'] mx-20">
+              <p className="text-justify font-['Literata'] mx-4 md:mx-20">
                 {randomVerse?.text}
               </p>
-              <p className="text-right font-['Literata'] mx-20">
+              <p className="text-right font-['Literata'] mx-4 md:mx-20">
                 {randomVerse?.book}
                 {"  "}
                 {randomVerse?.chapter}

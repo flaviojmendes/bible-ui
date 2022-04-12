@@ -37,8 +37,8 @@ export default function Videos(props: Props) {
 
           {props.isLoading &&
             [...Array(5)].map((e, i) => (
-              <div className="flex flex-row m-2 gap-4 animate-pulse">
-                <div className="w-2/5 h-20 rounded-md bg-primary-text"></div>
+              <div className="flex flex-row md:w-full m-2 gap-4 animate-pulse">
+                <div className="w-52 md:w-2/5 h-20 rounded-md bg-primary-text"></div>
                 <div className="w-3/5">
                   <div className="w-full h-5 bg-primary-text rounded-xl my-1"></div>
                   <div className="w-full h-5 bg-primary-text rounded-xl"></div>
